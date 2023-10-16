@@ -1,10 +1,11 @@
 import express from "express";
+import { Book } from "../models/bookModel.js"
 
 const router = express.Router();
 
 
 // Route for save a new book
-router.post("/books", async(req, res) => {
+router.post("/", async(req, res) => {
     try{
         if (
             !req.body.title ||
@@ -31,7 +32,7 @@ router.post("/books", async(req, res) => {
     }
 })
 //Route for Get All Books from database
-router.get("/books", async(req, res) => {
+router.get("/", async(req, res) => {
     try {
         const books = await Book.find({});
         return res.status(200).json({
@@ -47,7 +48,7 @@ router.get("/books", async(req, res) => {
 
 // Route for get book by id
 
-router.get("/books/:id", async(req, res) => {
+router.get("/:id", async(req, res) => {
     try {
 
         const { id } = req.params;
@@ -62,7 +63,7 @@ router.get("/books/:id", async(req, res) => {
 })
 
 // Route for update a book
-router.put("/books/:id", async(req, res) => {
+router.put("/:id", async(req, res) => {
     try {
         if (
             !req.body.title ||
@@ -88,7 +89,7 @@ router.put("/books/:id", async(req, res) => {
 })
 
 // Routes for deleting a book
-router.delete("/book/:id", async(req, res) => {
+router.delete("/:id", async(req, res) => {
     try {
         const { id } = req.params;
 
@@ -106,3 +107,4 @@ router.delete("/book/:id", async(req, res) => {
     }
 
 })
+export default router
